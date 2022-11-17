@@ -44,7 +44,7 @@ class DataPaketTravelFragment : Fragment() {
         val bundle = arguments
         val cari = bundle?.getString(/* key = */ "cari")
         binding.progressBar.visibility
-        RClient.instances.getDataPaketTravelAll().enqueue(object :
+        RClient.instances.getDataPaketTravel(cari).enqueue(object :
             Callback<ResponseDataPaketTravel>{
             override fun onResponse(
                 call: Call<ResponseDataPaketTravel>,

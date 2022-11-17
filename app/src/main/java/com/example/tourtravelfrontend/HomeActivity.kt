@@ -27,9 +27,9 @@ class HomeActivity : AppCompatActivity() {
         val mFragmentTransaction = mFragmentManager.beginTransaction()
         val mFragment = DataPaketTravelFragment()
 
-//        val textCari = binding.txtCari.text
+        val textCari = binding.txtCari.text
         val mBundle = Bundle()
-//        mBundle.putString("cari", textCari.toString())
+        mBundle.putString("cari", textCari.toString())
         mFragment.arguments = mBundle
         mFragmentTransaction.replace(R.id.fl_data, mFragment).commit()
     }
