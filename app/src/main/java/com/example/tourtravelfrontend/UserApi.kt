@@ -33,4 +33,34 @@ interface UserApi {
         @Field("email") email:String?,
         @Field("password") password:String?,
     ):Call<ResponseCreate>
+
+    @GET("paketTravels/{cari}")
+    fun getDataPaketTravel(@Path("cari") cari:String? = null):
+            Call<ResponseDataPaketTravel>
+    @GET("paketTravels")
+    fun getDataPaketTravelAll():
+            Call<ResponseDataPaketTravel>
+    @FormUrlEncoded
+    @POST("paketTravels")
+    fun createDataPaketTravel(
+        @Field("namaPaket") namaPaket:String?,
+        @Field("tujuan") tujuan:String?,
+        @Field("asal") asal:String?,
+        @Field("harga") harga:String?,
+        @Field("jam") jam:String?,
+        @Field("durasi") durasi:String?,
+    ):Call<ResponseCreate>
+    @DELETE("paketTravels/{userId}")
+    fun deleteDataPaketTravel(@Path("userId")userId:
+                   String?):Call<ResponseCreate>
+    @FormUrlEncoded
+    @PATCH("paketTravels/{mhsnobp}")
+    fun updateDataPaketTravel(
+        @Path("namaPaket") namaPaket:String?,
+        @Field("tujuan") tujuan:String?,
+        @Field("asal") asal:String?,
+        @Field("harga") harga:String?,
+        @Field("jam") jam:String?,
+        @Field("durasi") durasi:String?,
+    ):Call<ResponseCreate>
 }

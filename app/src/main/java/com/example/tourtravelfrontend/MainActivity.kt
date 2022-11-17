@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.btnLogin.setOnClickListener {
             saveData()
-            val intent = Intent(this, Register::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
         setTitle("User Login")
