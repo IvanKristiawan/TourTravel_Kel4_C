@@ -20,7 +20,7 @@ class DataPaketTravelFragment : Fragment() {
     private var _binding: FragmentDataPaketTravelBinding? = null
 
     private val binding get() = _binding!!
-    private val listMahasiswa = ArrayList<PaketTravelData>()
+    private val ListTravel = ArrayList<PaketTravelData>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,11 +50,11 @@ class DataPaketTravelFragment : Fragment() {
                 call: Call<ResponseDataPaketTravel>,
                 response: Response<ResponseDataPaketTravel>){
                 if (response.isSuccessful){
-                    listMahasiswa.clear()
+                    ListTravel.clear()
                     response.body()?.let {
-                        listMahasiswa.addAll(it.data) }
+                        ListTravel.addAll(it.data) }
                     val adapter =
-                        PaketTravelAdapter(listMahasiswa, requireContext())
+                        PaketTravelAdapter(ListTravel, requireContext())
                     binding.rvData.adapter = adapter
 //                    Log.e("TAG", "response 123456: " + Gson().toJson(listMahasiswa))
                     adapter.notifyDataSetChanged()

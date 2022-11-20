@@ -17,17 +17,18 @@ import kotlin.collections.ArrayList
 class FormEditPaketTravelActivity : AppCompatActivity() {
     private lateinit var binding : ActivityFormEditPaketTravelBinding
     private var b:Bundle? = null
-    private val listMahasiswa = ArrayList<PaketTravelData>()
+    private val ListTravel = ArrayList<PaketTravelData>()
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFormEditPaketTravelBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Form Edit Mahasiswa"
+        supportActionBar?.title = "Form Edit Paket Travel"
         b = intent.extras
-        val nim = b?.getString("nim")
-        nim?.let { getDetailData(it) }
+        val namaPaket = b?.getString("namaPaket")
+        namaPaket?.let { getDetailData(it) }
         binding.btnUpdate.setOnClickListener {
             with(binding) {
                 val namaPaket = txtNamapaket.text.toString()
@@ -56,8 +57,8 @@ class FormEditPaketTravelActivity : AppCompatActivity() {
             }
         }
     }
-    fun getDetailData(nim:String) {
-        RClient.instances.getDataPaketTravel(nim).enqueue(object :
+    fun getDetailData(namaPaket:String) {
+        RClient.instances.getDataPaketTravel(namaPaket).enqueue(object :
             Callback<ResponseDataPaketTravel> {
             override fun onResponse(
                 call: Call<ResponseDataPaketTravel>,
@@ -65,19 +66,19 @@ class FormEditPaketTravelActivity : AppCompatActivity() {
             ) {
                 if(response.isSuccessful){
                     response.body()?.let {
-                        listMahasiswa.addAll(it.data) }
+                        ListTravel.addAll(it.data) }
                     with(binding) {
-                        txtNamapaket.setText(listMahasiswa[0].namaPaket)
+                        txtNamapaket.setText(ListTravel[0].namaPaket)
 
-                        txtTujuan.setText(listMahasiswa[0].tujuan)
+                        txtTujuan.setText(ListTravel[0].tujuan)
 
-                        txtAsal.setText(listMahasiswa[0].asal)
+                        txtAsal.setText(ListTravel[0].asal)
 
-                        txtHarga.setText(listMahasiswa[0].harga)
+                        txtHarga.setText(ListTravel[0].harga)
 
-                        txtJam.setText(listMahasiswa[0].jam)
+                        txtJam.setText(ListTravel[0].jam)
 
-                        txtDurasi.setText(listMahasiswa[0].durasi)
+                        txtDurasi.setText(ListTravel[0].durasi)
                     }
                 }
             }

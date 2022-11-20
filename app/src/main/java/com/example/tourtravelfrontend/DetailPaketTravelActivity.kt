@@ -11,40 +11,42 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetailPaketTravelActivity : AppCompatActivity() {
+
     private lateinit var binding : ActivityDetailPaketTravelBinding
     private var b:Bundle? = null
-    private val listMahasiswa = ArrayList<PaketTravelData>()
+    private val ListTravel = ArrayList<PaketTravelData>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding =
-            ActivityDetailPaketTravelBinding.inflate(layoutInflater)
+        binding = ActivityDetailPaketTravelBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         b = intent.extras
-        val nim = b?.getString("nim")
-        nim?.let { getDataDetail(it) }
+        val namaPaket = b?.getString("namaPaket")
+        namaPaket?.let { getDataDetail(it) }
         binding.btnHapus.setOnClickListener {
-            nim?.let { it1 -> deleteData(it1) }
+            namaPaket?.let { it1 -> deleteData(it1) }
         }
         binding.btnEdit.setOnClickListener {
             startActivity(Intent(this, FormEditPaketTravelActivity::class.java).apply {
-                putExtra("nim",nim)
+                putExtra("namaPaket",namaPaket)
             })
         }
     }
-    fun getDataDetail(nim:String){
-        RClient.instances.getDataPaketTravel(nim).enqueue(object :
+    fun getDataDetail(namaPaket:String){
+        RClient.instances.getDataPaketTravel(namaPaket).enqueue(object :
             Callback<ResponseDataPaketTravel> {
             override fun onResponse(call: Call<ResponseDataPaketTravel>, response: Response<ResponseDataPaketTravel>) {
                 if(response.isSuccessful){
                     response.body()?.let {
-                        listMahasiswa.addAll(it.data) }
+                        ListTravel.addAll(it.data) }
                     with(binding) {
-                        tvNamapaket.text = listMahasiswa[0].namaPaket
-                        tvTujuan.text = listMahasiswa[0].tujuan
-                        tvAsal.text = listMahasiswa[0].asal
-                        tvHarga.text = listMahasiswa[0].harga
-                        tvJam.text = listMahasiswa[0].jam
-                        tvDurasi.text = listMahasiswa[0].durasi
+                        tvNamapaket.text = ListTravel[0].namaPaket
+                        tvTujuan.text = ListTravel[0].tujuan
+                        tvAsal.text = ListTravel[0].asal
+                        tvHarga.text = ListTravel[0].harga
+                        tvJam.text = ListTravel[0].jam
+                        tvDurasi.text = ListTravel[0].durasi
                     }
                 }
             }
@@ -56,21 +58,21 @@ class DetailPaketTravelActivity : AppCompatActivity() {
         super.onRestart()
         this.recreate()
     }
-    fun deleteData(nim:String){
+    fun deleteData(namaPaket:String){
         val builder =
             AlertDialog.Builder(this@DetailPaketTravelActivity)
         builder.setMessage("Anda Yakin mau hapus?? Saya ngga yakin loh.")
             .setCancelable(false)
             .setPositiveButton("Ya, Hapus Aja!"){dialog, id->
-                doDeleteData(nim)
+                doDeleteData(namaPaket)
             }
             .setNegativeButton("Tidak, Masih sayang dataku"){dialog,id -> dialog.dismiss()
             }
         val alert = builder.create()
         alert.show()
     }
-    private fun doDeleteData(nim:String) {
-        RClient.instances.deleteData(nim).enqueue(object :
+    private fun doDeleteData(namaPaket:String) {
+        RClient.instances.deleteData(namaPaket).enqueue(object :
             Callback<ResponseCreate>{
             override fun onResponse(call: Call<ResponseCreate>, response: Response<ResponseCreate>) {
                 if (response.isSuccessful) {

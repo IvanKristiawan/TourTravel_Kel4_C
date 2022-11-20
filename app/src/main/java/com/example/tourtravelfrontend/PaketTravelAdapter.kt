@@ -8,20 +8,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tourtravelfrontend.databinding.ListDataPaketTravelBinding
 
 class PaketTravelAdapter(
-    private val listMahasiswa:ArrayList<PaketTravelData>,
+    private val ListTravel:ArrayList<PaketTravelData>,
     private val context: Context
 ): RecyclerView.Adapter<PaketTravelAdapter.PaketTravelViewHolder>() {
-    inner class
-    PaketTravelViewHolder(item: ListDataPaketTravelBinding): RecyclerView.ViewHolder(item.root){
+
+    inner class PaketTravelViewHolder(item: ListDataPaketTravelBinding)
+        : RecyclerView.ViewHolder(item.root){
         private val binding = item
-        fun bind(mahasiswaData: PaketTravelData){
+        fun bind(TravelData: PaketTravelData){
             with(binding) {
-                txtNamapaket.text = mahasiswaData.namaPaket
-                txtHarga.text = mahasiswaData.harga
+                txtNamapaket.text = TravelData.namaPaket
+                txtHarga.text = TravelData.tujuan
+
                 cvData.setOnClickListener {
                     var i = Intent(context,
                         DetailPaketTravelActivity::class.java).apply {
-                        putExtra("nim",mahasiswaData.namaPaket)
+                        putExtra("namaPaket",TravelData.namaPaket)
                     }
                     context.startActivity(i)
                 }
@@ -37,7 +39,7 @@ class PaketTravelAdapter(
     }
     override fun onBindViewHolder(holder: PaketTravelViewHolder,
                                   position: Int) {
-        holder.bind(listMahasiswa[position])
+        holder.bind(ListTravel[position])
     }
-    override fun getItemCount(): Int = listMahasiswa.size
+    override fun getItemCount(): Int = ListTravel.size
 }
