@@ -5,7 +5,7 @@ import retrofit2.http.*
 
 interface UserApi {
     @GET("users/{cari}")
-    fun getData(@Path("cari") cari:String? = null):
+    fun getData (@Path("cari") cari:String? = null):
             Call<ResponseDataUser>
     @GET("userEmail/{cari}")
     fun getUserEmail(@Path("cari") cari:String? = null):
@@ -13,6 +13,7 @@ interface UserApi {
     @FormUrlEncoded
     @POST("users")
     fun createData(
+
         @Field("username") username:String?,
         @Field("email") email:String?,
         @Field("password") password:String?,
@@ -34,8 +35,8 @@ interface UserApi {
         @Field("password") password:String?,
     ):Call<ResponseCreate>
 
-    @GET("paketTravels/{cari}")
-    fun getDataPaketTravel(@Path("cari") cari:String? = null):
+    @GET("paketTravels/{idPaket}")
+    fun getDataPaketTravel(@Path("idPaket") cari:String? = null):
             Call<ResponseDataPaketTravel>
     @GET("paketTravels")
     fun getDataPaketTravelAll():
@@ -43,6 +44,7 @@ interface UserApi {
     @FormUrlEncoded
     @POST("paketTravels")
     fun createDataPaketTravel(
+        @Field("idPaket") idPaket:String?,
         @Field("namaPaket") namaPaket:String?,
         @Field("tujuan") tujuan:String?,
         @Field("asal") asal:String?,

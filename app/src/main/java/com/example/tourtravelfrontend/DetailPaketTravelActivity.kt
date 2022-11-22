@@ -22,19 +22,19 @@ class DetailPaketTravelActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         b = intent.extras
-        val namaPaket = b?.getString("namaPaket")
-        namaPaket?.let { getDataDetail(it) }
+        val idPaket = b?.getString("idPaket")
+        idPaket?.let { getDataDetail(it) }
         binding.btnHapus.setOnClickListener {
-            namaPaket?.let { it1 -> deleteData(it1) }
+            idPaket?.let { it1 -> deleteData(it1) }
         }
         binding.btnEdit.setOnClickListener {
             startActivity(Intent(this, FormEditPaketTravelActivity::class.java).apply {
-                putExtra("namaPaket",namaPaket)
+                putExtra("idPaket",idPaket)
             })
         }
     }
-    fun getDataDetail(namaPaket:String){
-        RClient.instances.getDataPaketTravel(namaPaket).enqueue(object :
+    fun getDataDetail(idPaket:String){
+        RClient.instances.getDataPaketTravel(idPaket).enqueue(object :
             Callback<ResponseDataPaketTravel> {
             override fun onResponse(call: Call<ResponseDataPaketTravel>, response: Response<ResponseDataPaketTravel>) {
                 if(response.isSuccessful){
@@ -71,8 +71,8 @@ class DetailPaketTravelActivity : AppCompatActivity() {
         val alert = builder.create()
         alert.show()
     }
-    private fun doDeleteData(namaPaket:String) {
-        RClient.instances.deleteData(namaPaket).enqueue(object :
+    private fun doDeleteData(idPaket:String) {
+        RClient.instances.deleteData(idPaket).enqueue(object :
             Callback<ResponseCreate>{
             override fun onResponse(call: Call<ResponseCreate>, response: Response<ResponseCreate>) {
                 if (response.isSuccessful) {

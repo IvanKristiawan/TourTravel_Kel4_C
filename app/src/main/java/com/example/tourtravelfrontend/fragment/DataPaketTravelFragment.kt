@@ -58,7 +58,7 @@ class DataPaketTravelFragment : Fragment() {
                     binding.rvData.adapter = adapter
 //                    Log.e("TAG", "response 123456: " + Gson().toJson(listMahasiswa))
                     adapter.notifyDataSetChanged()
-                    binding.progressBar.isVisible = false
+                    binding.progressBar.isVisible = true
                 }
             }
             override fun onFailure(call: Call<ResponseDataPaketTravel>, t:

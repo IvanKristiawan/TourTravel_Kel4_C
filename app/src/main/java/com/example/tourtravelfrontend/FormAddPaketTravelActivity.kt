@@ -27,6 +27,7 @@ class FormAddPaketTravelActivity : AppCompatActivity() {
     }
     fun saveData(){
         with(binding) {
+            val idPaket = txtNamapaket.text.toString()
             val namaPaket = txtNamapaket.text.toString()
             val tujuan = txtTujuan.text.toString()
             val asal = txtAsal.text.toString()
@@ -34,7 +35,7 @@ class FormAddPaketTravelActivity : AppCompatActivity() {
             val jam = txtJam.text.toString()
             val durasi = txtDurasi.text.toString()
 
-            RClient.instances.createDataPaketTravel(namaPaket,tujuan,asal,harga,jam,durasi).enqueue (object :
+            RClient.instances.createDataPaketTravel(idPaket, namaPaket,tujuan,asal,harga,jam,durasi).enqueue (object :
                 Callback<ResponseCreate> {
                 override fun onResponse(call: Call<ResponseCreate>, response: Response<ResponseCreate>) {
                     if(response.isSuccessful){
